@@ -1,15 +1,15 @@
 Play 2.1 application
 =====================================
 
-Please run using Play Framework 2.15 or higher by running: 
+Please run using Play Framework 2.1.5 with the following command: 
 play run
 
 The application then runs on http://localhost:9000
 
-Because I am using an in memory database the first time you
-browse browse you will have to allow Play to "evolve" the database
+Because I am using an in memory database the first time a user
+browses to the app they will have to allow Play to evolve the database
 by running the setup scripts. The page will have a message in the 
-header with a button:
+header with a button that needs to be clicked:
 
 ***********
 Database 'default' needs evolution!
