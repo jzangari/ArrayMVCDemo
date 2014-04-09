@@ -1,0 +1,36 @@
+MVC web application project
+
+Build a simple MVC web application with the following features.
+	
+	*A common layout page that renders partial views
+		*The common layout page should have a Heading
+	*Render all content in partial Views
+	*The application should start with a page with three inputs 
+	 	*First name
+			*Required
+		*Last name 
+			*Required
+		*Age
+			*optional
+	*after submission of the first page, the second page should
+		*display the first name in a read only and DISABLED input 
+		*display an empty read only and DISABLED input for the last name
+		*display two radio buttons
+			*1st radio button when selected will display the last name
+				*When clicked, the 2nd radio button if selected, will now be un-selected.
+				*use jquery to control the radio button click
+			*2nd radio button when selected will hide the last name
+				*When clicked, the 1st radio button if selected, will now be un-selected.
+				*use jquery to control the radio button click
+		*Display the age if it is provided in a read only and DISABLED input
+			*If age is not provided display the text NO AGE GIVEN 
+		*When submit is clicked on this page
+			*Show a confirmation dialog
+				*Text should read, "are you sure you want to submit"
+				*If yes is clicked submit to page 3
+				*If no is clicked stay on page 2
+			*use jquery to control the submit button click
+	*After submission to the third page
+		*Display the following text
+			*Hello, First name last name, your age is age.
+	*ALL three partial views should be handled by three different controllers

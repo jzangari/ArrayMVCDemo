@@ -27,7 +27,7 @@
 		<div class="col-sm-offset-2" id="displayLastNameRadioGroup">
 			<div class="row">
 				<!-- Defaults to value of "show" -->
-				<input type="radio" id="showLastName" name="displayLastNameRadio" checked="true" value="show">Show Last Name
+				<input type="radio" id="showLastName" name="displayLastNameRadio" checked="checked" value="show">Show Last Name
 			</div>
 			<div class="row">
 				<input type="radio" id="hideLastName" name="displayLastNameRadio" value="hide">Hide Last Name
@@ -36,11 +36,11 @@
 	</div>
 	
 	<!-- Age Input Group -->
-	<div class="form-group">
+	<div id = "ageGroup" class="form-group">
 		<label for="age" class="col-sm-2 control-label">Age</label>
-		<div class="col-sm-2">
+		<div id="ageInputContainer" class="col-sm-2">
 			<input type="text" class="form-control" name="age" id="age"
-				readonly="readonly"value="@person.getAge()">
+				readonly="readonly" value="@person.getAge()">
 		</div>
 	</div>
 	
@@ -55,12 +55,19 @@
 
 <script type="text/javascript">
     
-	//Form submission confirmation
-	$("#reviewForm").submit(function(event){
-		if(!confirm("are you sure you want to submit")){
-			event.preventDefault();
-		} 
+	//When Document is ready! 
+	//Set up Age field correctly
+	//Default value of radio group to show
+	//Call showLastName() to initialize form
+	$( document ).ready(function(){
+		if($("#age").val() == ""){
+			$("#age").removeAttr("type").attr("type","hidden");
+			$("#ageInputContainer").append("<p><b>NO AGE GIVEN</b></p>");
+		}
+	    $("#displayLastNameRadioGroup").data("value","show");
+	    showLastName();   
 	});
+
     
 	//Using JQuery to control radio clicks
     //Event for the hide radio button
@@ -88,7 +95,14 @@
 		$("#displayLastNameRadioGroup").data("value",$('input:radio[name=displayLastNameRadio]:checked').val())
 
     }
-    
+        
+	//Form submission confirmation
+	$("#reviewForm").submit(function(event){
+		if(!confirm("are you sure you want to submit")){
+			event.preventDefault();
+		} 
+	});
+	
     //Makes changes to the DOM to show the last name. 
     function showLastName(){
     	$("#showLastName").prop("checked", true);
@@ -101,9 +115,6 @@
     	$("#displayLastName").val("");
     }
     
-    //Defaultvalue of radio group to show, and set value for dumby display.
-    $("#displayLastNameRadioGroup").data("value","show");
-    showLastName();
 </script>
 
 }
