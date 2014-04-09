@@ -20,24 +20,19 @@ import static org.fest.assertions.Assertions.*;
 
 
 /**
-*
-* Simple (JUnit) tests that can call all parts of a play app.
-* If you are interested in mocking a whole application, see the wiki for more details.
+* UI Tests
 *
 */
-public class ApplicationTest {
+public class UserInterfaceTest {
 
-    @Test 
-    public void simpleCheck() {
-        int a = 1 + 1;
-        assertThat(a).isEqualTo(2);
-    }
-    
+
     @Test
-    public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
+    public void renderInputPersonDetails() {
+        Content html = views.html.inputPersonDetails.render();
         assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Your new application is ready.");
+        assertThat(contentAsString(html)).contains("First Name");
+        assertThat(contentAsString(html)).contains("Last Name");
+        assertThat(contentAsString(html)).contains("Age");
     }
   
    
