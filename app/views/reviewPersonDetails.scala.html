@@ -62,7 +62,7 @@
 	$( document ).ready(function(){
 		if($("#age").val() == ""){
 			$("#age").removeAttr("type").attr("type","hidden");
-			$("#ageInputContainer").append("<p><b>NO AGE GIVEN</b></p>");
+			$("#ageInputContainer").append("<p class='form-control'><b>NO AGE GIVEN</b></p>");
 		}
 	    $("#displayLastNameRadioGroup").data("value","show");
 	    showLastName();   
