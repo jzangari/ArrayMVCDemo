@@ -1,12 +1,15 @@
-@main("Demo App") {
+@main("Input Person Details") {
 
 <form id="inputForm" action="@routes.ReviewPersonDetails.reviewPerson()" method="post" class="form-horizontal">	
+	<!-- First Name Input (required)-->
 	<div class="form-group">
 		<label for="firstName" class="col-sm-2 control-label">First Name*</label>
 		<div class="col-sm-2">
 			<input type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required="true">
 		</div>
 	</div>
+	
+	<!-- Last Name Input (required)-->
 	<div class="form-group">
 		<label for="lastName" class="col-sm-2 control-label">Last Name*</label>
 		<div class="col-sm-2">
@@ -14,6 +17,8 @@
 				placeholder="Doe" required="true">
 		</div>
 	</div>
+	
+	<!-- Age Input (optional) -->
 	<div class="form-group">
 		<label for="age" class="col-sm-2 control-label">Age</label>
 		<div class="col-sm-2">
@@ -21,6 +26,8 @@
 				placeholder="45">
 		</div>
 	</div>
+	
+	<!-- Submit Button -->
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 			<button type="submit" class="btn btn-default">Submit</button>
@@ -33,6 +40,7 @@
 	</div>
 </div>
 
+<!-- Small bit of Java script to validate the Age field.  -->
 <script type="text/javascript">
     $(document).ready(function() {  
     	$("#inputForm").validate({

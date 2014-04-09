@@ -1,0 +1,15 @@
+@(person: Person)
+
+@main("Review Person Details") {
+	<div class = "col-sm-offset-2" id="welcomeMessage"> Welcome @person.getFirstName() @person.getLastName().</div>
+	
+	<script type="text/javascript">
+		$( document ).ready( function() {
+			if("@person.getAge()" != null)
+				$("#welcomeMessage").text(
+					$("#welcomeMessage").text().replace(
+					".",", your age is @person.getAge().")
+				);			
+		});
+	</script>
+}

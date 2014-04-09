@@ -1,14 +1,14 @@
 @(person: Person)
 
-@main("Demo App") {
+@main("Review Person Details") {
 
-<form id="inputForm" action="@routes.SavePerson.savePerson()" method="post" class="form-horizontal" role="form">	
+<form id="reviewForm" action="@routes.SavePerson.savePerson()" method="post" class="form-horizontal">		
 	<!-- First Name Input Group -->
 	<div class="form-group">
 		<label for="firstName" class="col-sm-2 control-label">First Name</label>
 		<div class="col-sm-2">
 			<input type="text" class="form-control" name="firstName" id="firstName" 
-			disabled="disabled" value="@person.getFirstName()">
+			readonly="readonly" value="@person.getFirstName()">
 		</div>
 	</div>
 	
@@ -16,8 +16,9 @@
 	<div class="form-group">
 		<label for="lastName" class="col-sm-2 control-label">Last Name</label>
 		<div class="col-sm-2">
-			<input type="text" class="form-control" name = "lastName" id="lastName"
-			disabled="disabled" value="@person.getLastName()">
+			<input type="text" class="form-control" name="displayLastName" id="displayLastName"
+			readonly="readonly">
+			<input id="lastName" name="lastName" type="hidden" value="@person.getLastName()">
 		</div>
 	</div>
 	
@@ -25,15 +26,12 @@
 	<div class="form-group">
 		<div class="col-sm-offset-2" id="displayLastNameRadioGroup">
 			<div class="row">
-				<input type="radio" id="showLastName" name="displayLastName" checked="true" value="show">Show Last Name
+				<!-- Defaults to value of "show" -->
+				<input type="radio" id="showLastName" name="displayLastNameRadio" checked="true" value="show">Show Last Name
 			</div>
 			<div class="row">
-				<input type="radio" id="hideLastName" name="displayLastName" value="hide">Hide Last Name
+				<input type="radio" id="hideLastName" name="displayLastNameRadio" value="hide">Hide Last Name
 			</div>
-			<!-- The events called when setup by JQuery 
-			can't reference the radio value before the event, 
-			so I preserve it here -->
-			<input type="hidden" id="preservedValue" value="show">
 		</div>
 	</div>
 	
@@ -42,49 +40,70 @@
 		<label for="age" class="col-sm-2 control-label">Age</label>
 		<div class="col-sm-2">
 			<input type="text" class="form-control" name="age" id="age"
-				disabled="disabled">
+				readonly="readonly"value="@person.getAge()">
 		</div>
 	</div>
+	
+	<!-- Submit Button -->
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button id="submit" type="submit" class="btn btn-default">Submit</button>
 		</div>
 	</div>
 </form>
 
+
 <script type="text/javascript">
     
-    //Event for first radio button
+	//Form submission confirmation
+	$("#reviewForm").submit(function(event){
+		if(!confirm("are you sure you want to submit")){
+			event.preventDefault();
+		} 
+	});
+    
+	//Using JQuery to control radio clicks
+    //Event for the hide radio button
 	$("#showLastName").click(function(){
 		setRadio();
 	}); 
     	
-    //Event for last radio button
+    //Event for thie hide radio button
     $("#hideLastName").click(function(){
 		setRadio();
     }); 
     
     //Sets the radio based on the hidden input "preservedValue" and the radio value after the event
     function setRadio(){
-		if( $("#preservedValue").val() == "show") {
+    	//Get previous value for radio group
+		var preservedValue = $("#displayLastNameRadioGroup").data("value");
+    	
+    	if( preservedValue == "show") {
 		    hideLastName();
-		} else if( $("#preservedValue").val() == "hide") {
+		} else if( preservedValue == "hide") {
 		    showLastName();
 		}
-    	$("#preservedValue").attr("value",$('input:radio[name=displayLastName]:checked').val());
+    	
+    	//Store the new value.
+		$("#displayLastNameRadioGroup").data("value",$('input:radio[name=displayLastNameRadio]:checked').val())
+
     }
     
     //Makes changes to the DOM to show the last name. 
     function showLastName(){
     	$("#showLastName").prop("checked", true);
-    	$("#lastName").val("@person.getLastName()");
+    	$("#displayLastName").val($("#lastName").val());
     }
     
     //Makes changes to the Dom to hide the last name.
     function hideLastName(){
     	$("#hideLastName").prop("checked", true);
-    	$("#lastName").val("");
+    	$("#displayLastName").val("");
     }
-</script>S
+    
+    //Defaultvalue of radio group to show, and set value for dumby display.
+    $("#displayLastNameRadioGroup").data("value","show");
+    showLastName();
+</script>
 
 }
