@@ -1,6 +1,7 @@
 @(person: Person)
 
 @main("Welcome") {
+
 	<div class = "col-sm-offset-2" id="welcomeMessage"> Welcome @person.getFirstName() @person.getLastName().</div>
 	
 	<!-- Java script for modifying message if age is valid -->
@@ -13,4 +14,5 @@
 				);			
 		});
 	</script>
+
 }

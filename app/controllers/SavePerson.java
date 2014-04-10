@@ -25,7 +25,6 @@ public class SavePerson extends Controller {
 				.bindFromRequest());
 		
 		Logger.debug(person.getAge());
-		
 		person.save();
         return ok(welcomePerson.render(person));
 	}
